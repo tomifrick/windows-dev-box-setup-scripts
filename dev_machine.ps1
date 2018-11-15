@@ -1,9 +1,8 @@
 # Description: Boxstarter Script
 # Author: Microsoft
-# Common settings for azure devops
+# Common dev settings for machine learning using Windows and Linux native tools
 
 Disable-UAC
-$ConfirmPreference = "None" #ensure installing powershell modules don't prompt on needed dependencies
 
 # Get the base URI path from the ScriptToCall value
 $bstrappackage = "-bootstrapPackage"
@@ -23,27 +22,16 @@ function executeScript {
 }
 
 #--- Setting up Windows ---
-executeScript "FileExplorerSettings.ps1";
+
 executeScript "SystemConfiguration.ps1";
+executeScript "Browser.ps1";
+executeScript "FileExplorerSettings.ps1";
 executeScript "RemoveDefaultApps.ps1";
 executeScript "CommonDevTools.ps1";
-executeScript "Browsers.ps1";
-
 executeScript "HyperV.ps1";
-RefreshEnv
-executeScript "WSL.ps1";
-RefreshEnv
 executeScript "Docker.ps1";
-
-choco install -y powershell-core
-choco install -y azure-cli
-Install-Module -Force Az
-choco install -y microsoftazurestorageexplorer
-choco install -y terraform
-
-# Install tools in WSL instance
-write-host "Installing tools inside the WSL distro..."
-Ubuntu1804 run apt install ansible -y
+executeScript "InstallWSL.ps1";
+executeScript "WSLTools.ps1";
 
 Enable-UAC
 Enable-MicrosoftUpdate
