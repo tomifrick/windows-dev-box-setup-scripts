@@ -23,12 +23,12 @@ Ubuntu1804 run sudo update-alternatives --config editor
 
 # install zsh
 write-host "Installing ZSH"
-Ubuntu1804 run apt install zsh
+Ubuntu1804 run apt install zsh -y
 Ubuntu1804 run chsh -s $(which zsh)
 # Oh my zsh (dont know if works)
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 write-host "Installing Terminator"
-Ubuntu1804 run apt install terminator
+Ubuntu1804 run apt install terminator -y
 
 write-host "Finished installing tools inside the WSL distro"
